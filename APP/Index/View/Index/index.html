@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <load href="/Public/css/bootstrap.css"/>
+    <!--<load href="/Public/css/index.css"/>-->
+</head>
+<body style="width: 100%;height: auto">
+<div style="width: 10%;height: 100px;margin-left: 70%; margin-top: 20px;">
+    <a href="{:U('Index/login')}" class="btn btn-success" role="button">Sign in</a>
+</div>
+<div style="width: 20%;height: auto;margin-left: 60%;margin-top: 3%">
+    <form action="{:U('Index/sign_up')}" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputUsername" name="inputUsername" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="inputNikename" name="inputNikename" placeholder="Nikename">
+        </div>
+        <div class="form-group">
+            <!--<label for="inputPassword">Password</label>-->
+            <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-success btn-lg btn-block">Sign Up</button>
+    </form>
+</div>
+</body>
+</html>
