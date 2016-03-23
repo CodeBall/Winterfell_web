@@ -67,8 +67,9 @@ class IndexController extends Controller {
             session('[start]');
             session('token',$res['token']);
             session('user_id',$res['user_id']);
+            session('name',$res['nikename']);
             //登陆成功,跳转到网站首页
-            $this->success();
+            $this->success('',U('Words/index'));
         }
     }
 }
