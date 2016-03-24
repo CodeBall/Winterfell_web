@@ -1,0 +1,17 @@
+/*index.html*/
+.bodys{
+    width: 100%;
+    height: auto;
+}
+.sign_in{
+    width: 10%;
+    height: 100px;
+    margin-left: 70%;
+    margin-top: 20px;
+}
+.sign_up{
+    width: 20%;
+    height: auto;
+    margin-left: 60%;
+    margin-top: 3%
+}

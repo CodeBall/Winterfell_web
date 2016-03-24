@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <title>Winterfell</title>
     <load href="/Public/css/bootstrap.css"/>
+    <load href="/Public/css/Index/login.css"/>
 </head>
 <body>
-<div style="width: 28%;height: auto;margin-left: 36% ;margin-top: 10%;">
-    <div style="margin: 0;padding: 0;width: 100%;height: 20%;">
-        <h1 style="text-align: center">Sign in to Winterfell</h1>
+<div class="login_s">
+    <div class="title">
+        <h1 class="title_h1">Sign in to Winterfell</h1>
     </div>
-    <div style="margin: 0;padding: 30px 20px;width: 100%;height: 80%;margin-top: 9%;border: 1px solid #D1D1D1;border-radius: 5px">
+    <div class="login_form">
         <form action="{:U('Index/login_handle')}" method="post">
             <div class="form-group">
                 <label for="InputEmail">Email address</label>
                 <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Email">
             </div>
-            <div style="padding: 10px 0px;"  class="form-group">
+            <div class="form-group form_pass">
                 <label for="InputPassword">Password
-                    <a style="margin-left: 120px" href="#">Forgot password?</a>
+                    <a class="forget_pass" href="#">Forgot password?</a>
                 </label>
                 <input type="password" class="form-control" id="InputPassword" name="InputPassword" placeholder="Password">
             </div>

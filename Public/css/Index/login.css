@@ -1,0 +1,30 @@
+.login_s{
+    width: 28%;
+    height: auto;
+    margin-left: 36% ;
+    margin-top: 10%;
+}
+.title{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 20%;
+}
+.title_h1{
+    text-align: center
+}
+.login_form{
+    margin: 0;
+    padding: 30px 20px;
+    width: 100%;
+    height: 80%;
+    margin-top: 9%;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px
+}
+.form_pass{
+    padding: 10px 0px;
+}
+.forget_pass{
+    margin-left: 120px
+}
