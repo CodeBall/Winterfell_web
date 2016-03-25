@@ -5,6 +5,7 @@
     <title>Winterfell</title>
     <load href="/Public/css/bootstrap.css"/>
     <load href="/Public/css/Words/index.css"/>
+    <load href="/Public/css/Add/index.css"/>
 </head>
 <body class="body_s">
 <div>
@@ -37,15 +38,40 @@
     </nav>
     <div class="body_1">
         <div class="body_2">
-            <p class="p_s">Winterfell,你的私有单词库</p>
+            <p class="p_s">扩充你的私有单词库</p>
         </div>
         <div class="body_3">
-           <a href="{:U('Add/index')}"> <div class="add_words">添加单词卡片</div></a>
-            <div class="add_words">查询释义</div>
-            <div class="add_words">查询例句</div>
-            <div class="add_words">查询造句</div>
-            <div class="add_words">时间线复习</div>
-            <div class="add_words">全部复习</div>
+            <div class="add_form1">
+                <div class="add_form2">
+                    <form method="post" action="{:U('Add/add_words')}">
+                        <div class="form-group">
+                            <label for="word_name">单词</label>
+                            <input type="text" class="form-control" id="word_name" name="word_name" placeholder="word name,compulsory element">
+                        </div>
+                        <div class="form-group">
+                            <label for="paraphrase">释义</label>
+                            <input type="text" class="form-control" id="paraphrase" name="paraphrase" placeholder="paraphrase,compulsory element">
+                        </div>
+                        <div class="form-group">
+                            <label for="original_sent">原句</label>
+                            <input type="text" class="form-control" id="original_sent" name="original_sent" placeholder="original sentence,alternative element">
+                        </div>
+                        <div class="form-group">
+                            <label for="make_sent1">造句1</label>
+                            <input type="text" class="form-control" id="make_sent1" name="make_sent1" placeholder="make sentence,alternative element">
+                        </div>
+                        <div class="form-group">
+                            <label for="make_sent2">造句2</label>
+                            <input type="text" class="form-control" id="make_sent2" name="make_sent2" placeholder="make sentence,alternative element">
+                        </div>
+                        <div class="form-group">
+                            <label for="make_sent3">造句3</label>
+                            <input type="text" class="form-control" id="make_sent3" name="make_sent3" placeholder="make sentence,alternative element">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="clear">
             <div class="clear_1">
@@ -55,7 +81,7 @@
                         使用Winterfell可以帮助你收集整理单词卡片电子化,并方便自己再次查阅已经积累的单词卡片.
                     </p>
                     <p class="font_color">你可以通过添加单词功能添加陌生单词的例句出处,释义,并可以添加3个造句.
-                        你可以通过某一个释义,某一个例句中的关键词,某一个造句中的关键词进行单词查询,也可以复习一段时间内的单词,
+                        你可以通过某一个释义,某一个原句中的关键词,某一个造句中的关键词进行单词查询,也可以复习一段时间内的单词,
                         当然,可以调取所有的单词进行复习
                     </p>
                     <p class="font_color">你可以点击随便看看,就可以看到10条你的或其他战友的单词卡片
@@ -65,7 +91,7 @@
                     <span class="font_color">技术栈</span>
                     <p class="font_color">PHP&nbsp;&nbsp;&nbsp;&nbsp;ThinkPHP&nbsp;&nbsp;&nbsp;&nbsp;
                         Bootstrap&nbsp;&nbsp;&nbsp;&nbsp;Python&nbsp;&nbsp;&nbsp;&nbsp;
-                    Flask&nbsp;&nbsp;&nbsp;&nbsp;Rest&nbsp;&nbsp;&nbsp;&nbsp;Mongo&nbsp;&nbsp;&nbsp;&nbsp;Mysql</p>
+                        Flask&nbsp;&nbsp;&nbsp;&nbsp;Rest&nbsp;&nbsp;&nbsp;&nbsp;Mongo&nbsp;&nbsp;&nbsp;&nbsp;Mysql</p>
                 </div>
             </div>
             <div class="clear_2">

@@ -1,0 +1,15 @@
+.add_form1{
+    width: 80%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background-color: #EDEDED;
+}
+.add_form2{
+    float: left;
+    width: 80%;
+    height: 400px;
+    margin-left: 10%;
+    margin-top: 5%;
+}

@@ -8,12 +8,17 @@ class IndexController extends Controller {
     }
     //用户注册处理
     public function sign_up(){
-        /*最好先判断是否为空,看能不能在前段页面通过js判断===========================================*/
+        $username = I('post.inputUsername');
+        $nikename = I('post.inputNikename');
+        $email = I('post.inputEmail');
+        $password = I('post.inputPassword');
+        if(!$username || !$nikename || !$email || !$password)
+            $this->error('输入的信息有空值,请重新注册',U('Index/Index/index'));
         $data = array(
-            'username' => I('post.inputUsername'),
-            'nikename' => I('post.inputNikename'),
-            'email' => I('post.inputEmail'),
-            'password' => md5(I('post.inputPassword'))
+            'username' => $username,
+            'nikename' => $nikename,
+            'email' => $email,
+            'password' => md5($password)
         );
         $data_string = json_encode($data);
         $ch = curl_init();
