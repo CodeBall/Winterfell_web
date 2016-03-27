@@ -49,7 +49,7 @@ class AddController extends Controller {
         $res = json_decode($result,true);
         if($res['status'] == 200)
             $this->success('单词卡添加成功',U('Index/Add/index'));
-        else if($res['status' == 'wrong'])
+        else if($res['status'] === "wrong")
             $this->error('登陆过期,请重新登录',U('Index/index/login'));
         else
             $this->error('添加失败',U('Index/Add/index'));

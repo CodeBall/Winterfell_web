@@ -1,0 +1,34 @@
+<include file="Common/header"/>
+<load href="/Public/css/Query/word_show.css"/>
+<include file="Common/nav"/>
+
+<div class="body_2">
+    <p class="p_s">现在开始复习单词</p>
+</div>
+<div class="body_3">
+    <div class="show_content">
+        <table class="table table-hover">
+            <tr>
+                <th>单词</th>
+                <th>释义</th>
+                <th>操作</th>
+            </tr>
+            <foreach name='select' item='word' >
+                <tr>
+                    <td>&nbsp;{$word.word_name}</td>
+                    <td>&nbsp;{$word.paraphrase}</td>
+                    <td>&nbsp;删除,修改</td>
+                </tr>
+            </foreach>
+            <!--分页出现了问题,自己写分页函数,后台操作吧.-->
+            <!--当前第1/453页 [首页] [上页] 1 2 3 4 5 6 7 8 9 10 [下页] [尾页]-->
+            <tr class="warning">
+                <td colspan="3"><div class="pages">
+                    {$page}
+                </div></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<include file="Common/bottom"/>

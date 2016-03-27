@@ -13,7 +13,6 @@ class WordsController extends Controller{
         if(empty($value)){
             $this->error("请登录",U('Index/login'));
         }
-        $this->name = session('name');
         $this->display();
     }
 }
