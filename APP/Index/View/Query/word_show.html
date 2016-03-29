@@ -9,15 +9,21 @@
     <div class="show_content">
         <table class="table table-hover">
             <tr>
-                <th>单词</th>
-                <th>释义</th>
-                <th>操作</th>
+                <th style="width: 13%">单词</th>
+                <th style="width: 70%">释义</th>
+                <th style="width: 17%">操作</th>
             </tr>
             <foreach name='select' item='word' >
                 <tr>
-                    <td>&nbsp;{$word.word_name}</td>
-                    <td>&nbsp;{$word.paraphrase}</td>
-                    <td>&nbsp;删除,修改</td>
+                    <td style="width: 13%">{$word.word_name}</td>
+                    <td style="width: 70%">{$word.paraphrase}</td>
+                    <td style="width: 17%">
+                        <a href="{:U('Query/show_one',array('word_id'=>$word['word_id']))}" aria-label="Previous">
+                            <button type="button" class="btn btn-success btn-sm">查看</button>
+                        </a>
+                        &nbsp;
+                        <a><button type="button" class="btn btn-success btn-sm">删除</button></a>
+                    </td>
                 </tr>
             </foreach>
         </table>
@@ -34,21 +40,20 @@
                     <li><a href="{:U('Query/all_word_show',array('p'=>$p+1,'count'=>$count,'bz'=>$bz,'key1' => $key1))}"><span>{$p+1}</span></a></li>
                 </if>
                 <if condition="($maxp gt ($p+2)) OR ($maxp eq ($p+2))">
-                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+2,'count'=>$count,'bz'=>$bz))}"><span>{$p+2}</span></a></li>
+                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+2,'count'=>$count,'bz'=>$bz,'key1' => $key1))}"><span>{$p+2}</span></a></li>
                 </if>
                 <if condition="($maxp gt ($p+3)) OR ($maxp eq ($p+3))">
-                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+3,'count'=>$count,'bz'=>$bz))}"><span>{$p+3}</span></a></li>
+                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+3,'count'=>$count,'bz'=>$bz,'key1' => $key1))}"><span>{$p+3}</span></a></li>
                 </if>
                 <if condition="($maxp gt ($p+4)) OR ($maxp eq ($p+4))">
-                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+4,'count'=>$count,'bz'=>$bz))}"><span>{$p+4}</span></a></li>
+                    <li><a href="{:U('Query/all_word_show',array('p'=>$p+4,'count'=>$count,'bz'=>$bz,'key1' => $key1))}"><span>{$p+4}</span></a></li>
                 </if>
 
                 <if condition="($p eq $maxp)"><li class="disabled"><else/><li></if>
-                <a href="{:U('Query/all_word_show',array('p'=>$p+1,'count'=>$count,'bz'=>$bz))}" aria-label="Next">
+                <a href="{:U('Query/all_word_show',array('p'=>$p+1,'count'=>$count,'bz'=>$bz,'key1' => $key1))}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
                 </li>
-                <li><span>{$key1}</span></li>
                 <li><span>{$p}/{$maxp}页&nbsp;&nbsp;{$count}条记录</span></li>
             </ul>
         </nav>

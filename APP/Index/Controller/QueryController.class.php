@@ -19,6 +19,8 @@ class QueryController extends Controller {
     //bz = 7:search输入框
     //查询所有单词
     public function all(){
+        if(!session('user_id'))
+            $this->error('登陆过期,请重新登录',U('Index/index/login'));
         $curl = curl_init();
         //获取总数
         curl_setopt($curl,
@@ -65,8 +67,12 @@ class QueryController extends Controller {
         elseif($bz == 2)
             curl_setopt($curl,
                 CURLOPT_URL,'http://127.0.0.1:5000/words/paraphrase/'.session('user_id')."/".$key."/".$No1."/".$num);
-
-
+        elseif($bz == 3)
+            curl_setopt($curl,
+                CURLOPT_URL,'http://127.0.0.1:5000/words/original/'.session('user_id')."/".$key."/".$No1."/".$num);
+        elseif($bz == 5)
+            curl_setopt($curl,
+                CURLOPT_URL,'http://127.0.0.1:5000/words/time/'.session('user_id')."/".$key."/".$No1."/".$num);
         curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
         $response = curl_exec($curl);
         $jsondecode = json_decode($response,true);
@@ -84,13 +90,13 @@ class QueryController extends Controller {
         $this->assign('key1', $key);
         $this->display('word_show');
     }
+    //根据释义查询处理
     public function paraphrase(){
         if(!session('user_id'))
             $this->error('登陆过期,请重新登录',U('Index/index/login'));
         else
             $this->display();
     }
-    //根据释义查询处理
     public function paraphrase_handle(){
         $key = I('post.paraphrase_word');
         $curl = curl_init();
@@ -125,5 +131,154 @@ class QueryController extends Controller {
         $this->assign('count', $count);
         $this->assign('p', 1);
         $this->display('word_show');
+    }
+    //根据原句进行查询
+    public function original(){
+        if(!session('user_id'))
+            $this->error('登陆过期,请重新登录',U('Index/index/login'));
+        else
+            $this->display();
+    }
+    public function original_sent_handle(){
+        $key = I('post.original_sent');
+        $curl = curl_init();
+        //获取数目
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/original/'.session('user_id')."/".$key."/count");
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        $count = curl_exec($curl);
+        curl_close($curl);
+
+        $num = 10;
+        $No1 = 0;
+        $curl = curl_init();
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/original/'.session('user_id')."/".$key."/".$No1."/".$num);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $jsondecode = json_decode($response,true);
+        $word = $jsondecode['words'];
+
+        $this->assign('select', $word); // 赋值数据集
+
+        if($count%10 == 0)
+            $this->maxp = floor($count/10);
+        else
+            $this->maxp = floor($count/10)+1;
+        //调用页面
+        $this->assign('key1', $key);
+        $this->assign('bz', 3);
+        $this->assign('count', $count);
+        $this->assign('p', 1);
+        $this->display('word_show');
+    }
+    //根据造句进行查询
+    public function make_sent(){
+        if(!session('user_id'))
+            $this->error('登陆过期,请重新登录',U('Index/index/login'));
+        else
+            $this->display();
+    }
+    public function make_sent_handle(){
+        $key = I('post.make_sent');
+
+        $curl = curl_init();
+        //获取数目
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/make/'.session('user_id')."/".$key."/count");
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        $count = curl_exec($curl);
+        curl_close($curl);
+
+        $curl = curl_init();
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/make/'.session('user_id')."/".$key);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $jsondecode = json_decode($response,true);
+        $word = $jsondecode['words'];
+
+        if($count > 12) {
+            $word = array_slice($word, 0, 12);
+            $count = 12;
+        }
+        $this->assign('select', $word); // 赋值数据集
+        $this->maxp = 1;
+        //调用页面
+        $this->assign('key1', $key);
+        $this->assign('bz', 4);
+        $this->assign('count', $count);
+        $this->assign('p', 1);
+        $this->display('word_show');
+    }
+    //选择某一时间段的单词进行查询
+    public function time(){
+        if(!session('user_id'))
+            $this->error('登陆过期,请重新登录',U('Index/index/login'));
+        else
+            $this->display();
+    }
+    public function time_handle(){
+        $time = I('post.time');
+
+        $curl = curl_init();
+        //获取数目
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/time/'.session('user_id')."/".$time."/count");
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+        $count = curl_exec($curl);
+        curl_close($curl);
+
+        $num = 10;
+        $No1 = 0;
+        $curl = curl_init();
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/time/'.session('user_id')."/".$time."/".$No1."/".$num);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $jsondecode = json_decode($response,true);
+        $word = $jsondecode['words'];
+
+        $this->assign('select', $word); // 赋值数据集
+
+        if($count%10 == 0)
+            $this->maxp = floor($count/10);
+        else
+            $this->maxp = floor($count/10)+1;
+        //调用页面
+        $this->assign('key1', $time);
+        $this->assign('bz', 5);
+        $this->assign('count', $count);
+        $this->assign('p', 1);
+        $this->display('word_show');
+    }
+    //显示某一个单词
+    public function show_one(){
+        $id = $_GET['word_id'];
+
+        $curl = curl_init();
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/'.$id);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $jsondecode = json_decode($response,true);
+        $word = $jsondecode['words'];
+        if(empty($word['make_sent1']))
+            $word['make_sent1'] = '还没有内容哦,编辑一下吧.';
+        if(empty($word['make_sent2']))
+            $word['make_sent2'] = '还没有内容哦,编辑一下吧.';
+        if(empty($word['make_sent3']))
+            $word['make_sent3'] = '还没有内容哦,编辑一下吧.';
+        $this->assign('word',$word);
+        $this->assign('word_id',$id);
+        $this->display();
     }
 }

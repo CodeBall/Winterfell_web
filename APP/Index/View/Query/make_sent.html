@@ -1,0 +1,20 @@
+<include file="Common/header"/>
+<load href="/Public/css/Query/paraphrase.css"/>
+<include file="Common/nav"/>
+
+<div class="body_2">
+    <p class="p_s">根据释义查询单词</p>
+</div>
+<div class="body_3">
+    <div class="query_para">
+        <form method="post" action="{:U('Query/make_sent_handle')}">
+            <div class="form-group">
+                <label for="make_sent">请输入要查询的造句</label>
+                <input type="text" class="form-control" id="make_sent" name="make_sent">
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<include file="Common/bottom"/>
