@@ -13,7 +13,7 @@ class IndexController extends Controller {
         $email = I('post.inputEmail');
         $password = I('post.inputPassword');
         if(!$username || !$nikename || !$email || !$password)
-            $this->error('输入的信息有空值,请重新注册',U('Index/Index/index'));
+            $this->error('输入的信息有空值,请重新注册',U('Index/index'),1);
         $data = array(
             'username' => $username,
             'nikename' => $nikename,
@@ -39,7 +39,7 @@ class IndexController extends Controller {
             $this->nikename = $result['nikename'];
             $this->email = $result['email'];
             //跳转至成功界面
-            $this->success('',U('Index/Common/success'));
+            $this->success('注册成功,页面跳转中...',U('Index/login'),1);
         }
     }
     //跳转至登陆界面
@@ -66,7 +66,7 @@ class IndexController extends Controller {
         //将返回的json格式的信息转换成数组形式
         $res = json_decode($result,true);
         if($res['status'] == "false"){
-            $this->error('用户名或密码错误,登录失败',U('Index/login'));
+            $this->error('用户名或密码错误,登录失败,页面跳转中...',U('Index/login'),1);
         }else{
             //将token存放在session中
             session('[start]');
@@ -74,7 +74,7 @@ class IndexController extends Controller {
             session('user_id',$res['user_id']);
             session('name',$res['nikename']);
             //登陆成功,跳转到网站首页
-            $this->success('',U('Words/index'));
+            $this->success('登陆成功,页面跳转中...',U('Words/index',0));
         }
     }
 }

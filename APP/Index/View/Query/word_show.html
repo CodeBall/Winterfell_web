@@ -22,7 +22,9 @@
                             <button type="button" class="btn btn-success btn-sm">查看</button>
                         </a>
                         &nbsp;
-                        <a><button type="button" class="btn btn-success btn-sm">删除</button></a>
+                        <a href="{:U('Query/delete_word',array('word_id'=>$word['word_id']))}" aria-label="Previous">
+                            <button type="button" class="btn btn-success btn-sm">删除</button>
+                        </a>
                     </td>
                 </tr>
             </foreach>

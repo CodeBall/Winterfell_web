@@ -22,8 +22,8 @@ class AddController extends Controller {
         $make_sent2 = I('post.make_sent2');
         $make_sent3 = I('post.make_sent3');
         //判断非空项
-        if(!$word_name || !$paraphrase)
-            $this->error('单词和释义必须要写哦',U('Index/Add/index'));
+        if(!$word_name || !$paraphrase || !$original_sent)
+            $this->error('单词,释义和原句必须要写哦',U('Index/Add/index'),1);
         $data = array(
             "word_name"=>$word_name,
             "paraphrase"=>$paraphrase,
@@ -48,10 +48,10 @@ class AddController extends Controller {
         $result = curl_exec($ch);
         $res = json_decode($result,true);
         if($res['status'] == 200)
-            $this->success('单词卡添加成功',U('Index/Add/index'));
+            $this->success('单词卡添加成功,页面跳转中...',U('Index/Add/index'),0);
         else if($res['status'] === "wrong")
-            $this->error('登陆过期,请重新登录',U('Index/index/login'));
+            $this->error('登陆过期,请重新登录',U('Index/index/login'),1);
         else
-            $this->error('添加失败',U('Index/Add/index'));
+            $this->error('添加失败,页面跳转中...',U('Index/Add/index'),1);
     }
 }

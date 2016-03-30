@@ -39,6 +39,7 @@ class QueryController extends Controller {
         $response = curl_exec($curl);
         $jsondecode = json_decode($response,true);
         $word = $jsondecode['words'];
+//        print_r($word);die;
         $this->assign('select', $word); // 赋值数据集
 
         if($count%10 == 0)
@@ -280,5 +281,31 @@ class QueryController extends Controller {
         $this->assign('word',$word);
         $this->assign('word_id',$id);
         $this->display();
+    }
+    //删除操作
+    public function delete_word(){
+        $id = $_GET['word_id'];
+        $data = array(
+            "wordId"=>$id,
+            "token"=>session('token')
+        );
+        $data_string = json_encode($data);
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,'http://127.0.0.1:5000/words/delete');
+        curl_setopt($ch,CURLOPT_CUSTOMREQUEST,"DELETE");
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data_string);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,array(
+            'Content-Type:application/json',
+            'Content-Length:'.strlen($data_string)
+        ));
+        $result = curl_exec($ch);
+        $res = json_decode($result,true);
+        if($res['status'] == 200)
+            $this->success('单词卡删除成功',U('Index/Words/index',0));
+        else if($res['status'] === "wrong")
+            $this->error('登陆过期,请重新登录',U('Index/index/login',1));
+        else
+            $this->error('删除失败',U('Index/Words/index',1));
     }
 }

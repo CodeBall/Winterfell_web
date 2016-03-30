@@ -11,7 +11,7 @@ class WordsController extends Controller{
     public function index(){
         $value = session('token');
         if(empty($value)){
-            $this->error("请登录",U('Index/login'));
+            $this->error("请登录",U('Index/login'),1);
         }
         $this->display();
     }
