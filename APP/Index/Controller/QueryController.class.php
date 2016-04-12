@@ -308,4 +308,24 @@ class QueryController extends Controller {
         else
             $this->error('删除失败',U('Index/Words/index',1));
     }
+    //随便看看
+    public function top(){
+        $curl = curl_init();
+        curl_setopt($curl,
+            CURLOPT_URL,'http://127.0.0.1:5000/words/top');
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        $jsondecode = json_decode($response,true);
+        $word = $jsondecode['words'];
+
+        $this->assign('select', $word); // 赋值数据集
+
+
+        $this->assign('bz', 6);
+        $this->assign('count', 10);
+        $this->assign('p', 1);
+        $this->display('word_show');
+    }
 }
